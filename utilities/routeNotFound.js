@@ -1,7 +1,6 @@
-export async function routeNotFound() {
-    var response = {}
-    return response = {
-        'status':'error',
-        'message':'Route not found'
-    }
+export function routeNotFound(req, res, next) {
+    return res.status(404).json({
+        status: 'error',
+        message: 'Route not found'
+    });
 }
