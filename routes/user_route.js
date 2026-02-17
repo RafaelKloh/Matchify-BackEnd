@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import { email } from '../controllers/user_controller.js'
+import { email,registerUserController } from '../controllers/user_controller.js'
 
 export const routeUser = Router()
 
-routeUser.get('/email', email)
+routeUser.post('/email', email)
+routeUser.post('/register', registerUserController)
