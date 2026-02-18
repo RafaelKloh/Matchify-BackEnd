@@ -28,7 +28,7 @@ export async function registerUser(data) {
 
         await connection.query(query, values)
         return res = {
-            'status': 'success'
+            'status': 200
         }
     } catch (err) {
         if (err.code && err.sqlMessage) {

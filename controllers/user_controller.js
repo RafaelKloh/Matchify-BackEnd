@@ -1,5 +1,5 @@
 import { getUserModel, registerUser } from "../models/user_model.js"
-import { validate } from "../utilities/validator.js"
+import * as utils from "../utilities/functions.js"
 
 //TODO Função responsável por válidar o email enviado pelo usuário
 export async function email(req, res) {
@@ -13,10 +13,14 @@ export async function email(req, res) {
 
 export async function registerUserController(req, res) {
     try {
-        const dados = await validate(req.body)
-        const user = await registerUser(dados)
-        if (user.status == 'success') {
-            return res.status(200).json({ response: 'User created succefully!' })
+        const data = req.body
+        utils.validateRegisterUser(data.email, data.password,data.name)
+        const user = await registerUser(data)
+        if (user.status == 200) {
+            return res.status(200).json({
+                status: 200,
+                message: 'User created succefully!'
+            })
         }
         else {
             return res.status(400).json(user)
